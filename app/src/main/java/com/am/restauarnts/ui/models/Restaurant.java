@@ -3,7 +3,6 @@ package com.am.restauarnts.ui.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.am.onlinerestaurant.data.model.FirebaseRestaurant;
 
 /**
  * Created by ALa on 3/13/2018.
@@ -29,14 +28,7 @@ public class Restaurant implements Parcelable{
     public void setId(String id) {
         this.id = id;
     }
-    public static Restaurant fromFirebase(FirebaseRestaurant restaurant){
-        Restaurant res = new Restaurant();
-        res.setName(restaurant.getName());
-        res.setImgUrl(restaurant.getImg());
-        res.setId(restaurant.getId());
-        res.setOpen(restaurant.isOpen());
-        return res;
-    }
+
 
     private String id;
 

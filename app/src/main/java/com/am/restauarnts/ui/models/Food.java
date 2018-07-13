@@ -2,11 +2,6 @@ package com.am.restauarnts.ui.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
-import com.am.onlinerestaurant.data.model.FirebaseFood;
-import com.am.onlinerestaurant.data.model.FirebaseSubFood;
-import com.am.onlinerestaurant.data.model.FirebaseTopFood;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,55 +47,6 @@ public class Food implements Parcelable{
     }
 
     public Food(){}
-
-
-
-    public static Food fromFirebase(FirebaseFood firebaseFood){
-        Food food = new Food();
-        food.setName(firebaseFood.getName());
-        food.setNewPrice(firebaseFood.getPrice());
-        food.setId(firebaseFood.getId());
-        food.setImgUrl(firebaseFood.getImg());
-        food.setDescription(firebaseFood.getDescription());
-        if(firebaseFood.getCats()!=null){
-            List<Food> subfoods = new ArrayList<>();
-            for (FirebaseSubFood sf
-                    : firebaseFood.getCats() ) {
-                Food f = new Food();
-                f.setId(sf.getId());
-                f.setNewPrice(sf.getPrice());
-                f.setName(sf.getName());
-                f.setImgUrl(firebaseFood.getImg());
-                subfoods.add(f);
-            }
-            food.setFoodCats(subfoods);
-        }
-        return food;
-    }
-    public static Food fromFirebase(FirebaseTopFood firebaseFood){
-        Food food = new Food();
-        food.setName(firebaseFood.getName());
-        food.setNewPrice(firebaseFood.getPrice());
-        food.setId(firebaseFood.getId());
-        food.setImgUrl(firebaseFood.getImg());
-        food.setDescription(firebaseFood.getDescription());
-        food.setRestaurant(Restaurant.fromFirebase(firebaseFood.getRestaurant()));
-        if(firebaseFood.getCats()!=null){
-            List<Food> subfoods = new ArrayList<>();
-            for (FirebaseSubFood sf
-                    : firebaseFood.getCats() ) {
-                Food f = new Food();
-                f.setId(sf.getId());
-                f.setNewPrice(sf.getPrice());
-                f.setName(sf.getName());
-                f.setImgUrl(firebaseFood.getImg());
-                subfoods.add(f);
-            }
-            food.setFoodCats(subfoods);
-        }
-        return food;
-    }
-
 
 
     public String getId() {

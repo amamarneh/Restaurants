@@ -2,8 +2,7 @@ package com.am.restauarnts.ui.models;
 
 import android.content.Context;
 import android.widget.Toast;
-
-import com.am.onlinerestaurant.Utils;
+import com.am.restauarnts.utils.CartUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,11 +37,11 @@ public class Cart{
     public void clear(Context context){
         cartItems.clear();
         restaurant = null;
-        Utils.CartUtil.saveCart(context,this);
+        CartUtil.saveCart(context,this);
     }
 
     public synchronized static Cart getCart(Context context){
-        Cart cart= Utils.CartUtil.getCart(context);
+        Cart cart= CartUtil.getCart(context);
         if(cart == null)
             return new Cart();
         return cart;
@@ -109,7 +108,7 @@ public class Cart{
             setRestaurant(restaurant);
         }
 
-        Utils.CartUtil.saveCart(context,this);
+        CartUtil.saveCart(context,this);
         return this;
     }
     public synchronized Cart decrementItem(Context context, Food food) {
@@ -124,7 +123,7 @@ public class Cart{
                 break;
             }
         }
-        Utils.CartUtil.saveCart(context,this);
+        CartUtil.saveCart(context,this);
         return this;
     }
     public synchronized int decrementItem(Context context, CartItem ci) {
@@ -143,7 +142,7 @@ public class Cart{
                 break;
             }
         }
-        Utils.CartUtil.saveCart(context,this);
+        CartUtil.saveCart(context,this);
         return c;
     }
     public synchronized int incrementItem(Context context, CartItem ci) {
@@ -157,7 +156,7 @@ public class Cart{
                 break;
             }
         }
-        Utils.CartUtil.saveCart(context,this);
+        CartUtil.saveCart(context,this);
         return c;
     }
     public synchronized Cart incrementItem(Context context, Food food) {
@@ -168,7 +167,7 @@ public class Cart{
                 break;
             }
         }
-        Utils.CartUtil.saveCart(context,this);
+        CartUtil.saveCart(context,this);
         return this;
     }
     public void removeItem(Context context,CartItem ci){
@@ -179,6 +178,6 @@ public class Cart{
                 break;
             }
         }
-        Utils.CartUtil.saveCart(context,this);
+        CartUtil.saveCart(context,this);
     }
 }

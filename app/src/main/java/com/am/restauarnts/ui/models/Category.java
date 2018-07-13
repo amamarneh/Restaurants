@@ -1,7 +1,5 @@
 package com.am.restauarnts.ui.models;
 
-import com.am.onlinerestaurant.data.model.FirebaseCategory;
-
 import java.util.List;
 
 public class Category {
@@ -33,10 +31,4 @@ public class Category {
         this.foods = foods;
     }
 
-    public static Category fromFirebase(FirebaseCategory category){
-        Category c = new Category();
-        c.setName(category.getName());
-        c.setId(category.getId());
-        return c;
-    }
 }
