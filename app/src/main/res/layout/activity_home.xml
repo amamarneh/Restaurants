@@ -1,0 +1,64 @@
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg1"
+        android:orientation="vertical"
+        tools:context=".ui.activities.HomeActivity">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img1"/>
+        <TextView
+            android:id="@+id/tvTitle"
+            android:fontFamily="@font/roboto"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            android:text="Discover\nRestaurants"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <android.support.design.widget.CoordinatorLayout
+            android:id="@+id/view_need_offset"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@android:color/transparent"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+            </android.support.v7.widget.Toolbar>
+
+
+        </android.support.design.widget.CoordinatorLayout>
+
+
+        <FrameLayout
+            android:layout_above="@id/bottom_navigation"
+            android:layout_marginTop="100dp"
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+
+        <android.support.design.widget.BottomNavigationView
+            app:elevation="4dp"
+            android:background="@android:color/white"
+            android:id="@+id/bottom_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+
+            app:menu="@menu/bottom_navigation_main" />
+
+
+    </RelativeLayout>

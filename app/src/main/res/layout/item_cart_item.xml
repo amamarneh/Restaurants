@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:gravity="center_horizontal"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <LinearLayout
+            android:background="@color/white"
+            android:padding="16dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <android.support.design.card.MaterialCardView
+                app:cardCornerRadius="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:scaleType="centerCrop"
+                    android:id="@+id/image"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp" />
+            </android.support.design.card.MaterialCardView>
+
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:paddingStart="8dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:id="@+id/tvName"
+                        android:text="r name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <android.support.design.card.MaterialCardView
+                        app:cardElevation="0dp"
+                        app:cardCornerRadius="8dp"
+                        app:strokeWidth="1dp"
+                        app:strokeColor="@color/gray"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                            <android.support.design.button.MaterialButton
+                                android:gravity="center"
+                                android:textAlignment="center"
+                                style="@style/Widget.MaterialComponents.Button.TextButton"
+                                app:backgroundTint="@color/white"
+                                android:textColor="@color/blue"
+                                android:textStyle="bold"
+                                android:textSize="20sp"
+                                android:id="@+id/btnInc"
+                                android:minWidth="40dp"
+                                android:minHeight="40dp"
+                                android:text="+"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                            <TextView
+                                android:textSize="18sp"
+                                android:id="@+id/tvQuantity"
+                                android:text="2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                            <android.support.design.button.MaterialButton
+                                style="@style/Widget.MaterialComponents.Button.TextButton"
+                                app:backgroundTint="@color/white"
+                                android:textColor="@color/blue"
+                                android:textStyle="bold"
+                                android:textSize="20sp"
+                                android:id="@+id/btnDec"
+                                android:text="-"
+                                android:minWidth="40dp"
+                                android:minHeight="40dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+                        </LinearLayout> <!-- inc, dec  -->
+                    </android.support.design.card.MaterialCardView>
+
+
+                    <TextView
+                        android:id="@+id/tvMessage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:text="Total"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:textStyle="bold"
+                            android:id="@+id/tvTotal"
+                            android:textColor="@color/black"
+                            android:layout_marginStart="8dp"
+                            android:text="50 NIS"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <android.support.design.button.MaterialButton
+                    app:backgroundTint="@color/red"
+                    android:layout_marginEnd="8dp"
+                    app:cornerRadius="16dp"
+                    style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                    android:id="@+id/btnRemove"
+                    android:text="x"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp" />
+            </LinearLayout> <!-- remove  button -->
+
+
+
+        </LinearLayout>
+
+
+
+</LinearLayout>
