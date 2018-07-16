@@ -94,7 +94,7 @@ public class CartItemsAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             tvName.setText(items.get(getAdapterPosition()).getFood().getName());
 
             tvQuantity.setText(items.get(getAdapterPosition()).getQuantity() + "");
-            float total = items.get(getAdapterPosition()).getQuantity() * items.get(getAdapterPosition()).getFood().getNewPrice();
+            float total = items.get(getAdapterPosition()).getQuantity() * items.get(getAdapterPosition()).getFood().getPrice();
             tvTotal.setText(total+"");
             tvMessage.setText(items.get(getAdapterPosition()).getMessage());
             if(TextUtils.isEmpty(items.get(getAdapterPosition()).getMessage()))
@@ -102,7 +102,7 @@ public class CartItemsAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             else
                 tvMessage.setVisibility(View.VISIBLE);
 
-            Glide.with(itemView.getContext()).load(items.get(getAdapterPosition()).getFood().getImgUrl())
+            Glide.with(itemView.getContext()).load(items.get(getAdapterPosition()).getFood().getImage())
                     .into(image);
 
             btnInc.setOnClickListener(v->{

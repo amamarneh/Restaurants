@@ -16,7 +16,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activities.HomeActivity"></activity>
+        <activity
+            android:name=".ui.activities.HomeActivity"
+            android:theme="@style/AppTheme.NoActionBarHome" />
+        <activity android:name=".ui.activities.RestaurantActivity" />
+        <activity
+            android:name=".ui.activities.ScrollingActivity"
+            android:label="@string/title_activity_scrolling"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ui.activities.Main2Activity"
+            android:label="@string/title_activity_main2"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

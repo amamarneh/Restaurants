@@ -22,7 +22,7 @@ public class Cart{
         double sum=0;
         for (CartItem ci :
                 cartItems) {
-            sum += (ci.getFood().getNewPrice() * ci.getQuantity());
+            sum += (ci.getFood().getPrice() * ci.getQuantity());
         }
         return Math.round(sum * 100.0)/100.0;
     }
@@ -64,7 +64,7 @@ public class Cart{
     public int getItemCount(Food food) {
         for (CartItem ci :
                 cartItems) {
-            if (ci.getFood().getId().equals(food.getId())) {
+            if (ci.getFood().getId()== food.getId()) {
                 return ci.getQuantity();
             }
         }
@@ -74,8 +74,8 @@ public class Cart{
     public synchronized Cart addItem(Context context, CartItem ci, Restaurant restaurant){
         // check if the item belong to same restaurant
         if( Cart.getCart(context).getRestaurant() != null){ // not first add
-            String id = Cart.getCart(context).getRestaurant().getId();
-            if(!restaurant.getId().equals(id)){
+            int id = Cart.getCart(context).getRestaurant().getId();
+            if(restaurant.getId() != id){
                 Toast.makeText(context, "new restaurant, this will clear previous cart", Toast.LENGTH_SHORT).show();
                 clear(context);
             }
@@ -86,7 +86,7 @@ public class Cart{
         boolean found = false;
         for (CartItem cartItem :
                 cartItems) {
-            if (cartItem.getFood().getId().equals(food.getId())){
+            if (cartItem.getFood().getId()== food.getId()){
                 // add quantity
                 if(cartItem.getMessage() != null && ci.getMessage() != null){
                     if (cartItem.getMessage().equals(ci.getMessage())){
@@ -114,7 +114,7 @@ public class Cart{
     public synchronized Cart decrementItem(Context context, Food food) {
         for (CartItem cartItem :
                 cartItems) {
-            if (cartItem.getFood().getId().equals(food.getId())) {
+            if (cartItem.getFood().getId()==food.getId()) {
                 cartItem.setQuantity(cartItem.getQuantity() - 1);
                 if (cartItem.getQuantity() <= 0) {
                     cartItems.remove(cartItem);
@@ -162,7 +162,7 @@ public class Cart{
     public synchronized Cart incrementItem(Context context, Food food) {
         for (CartItem cartItem :
                 cartItems) {
-            if (cartItem.getFood().getId().equals(food.getId())) {
+            if (cartItem.getFood().getId()==food.getId()) {
                 cartItem.setQuantity(cartItem.getQuantity() + 1);
                 break;
             }

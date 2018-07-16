@@ -1,9 +1,7 @@
 package com.am.restauarnts.ui.fragments;
 
 
-import android.arch.lifecycle.Observer;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,43 +11,35 @@ import android.view.ViewGroup;
 
 import com.am.restauarnts.R;
 import com.am.restauarnts.repo.RepoFactory;
-import com.am.restauarnts.task.LiveResponse;
-import com.am.restauarnts.ui.adapters.RestaurantsAdapter;
-import com.am.restauarnts.ui.models.Restaurant;
-
-import java.util.List;
+import com.am.restauarnts.ui.adapters.MenuAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class RestaurantsFragment extends Fragment {
+public class RestaurantMenuFragment extends Fragment {
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 
-    private RecyclerView.Adapter mAdapter;
-
-    public RestaurantsFragment() {
+    public RestaurantMenuFragment() {
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_restaurants, container, false);
-        ButterKnife.bind(this,view);
+        View rootView = inflater.inflate(R.layout.fragment_restaurant_menu, container, false);
+        ButterKnife.bind(this,rootView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setHasFixedSize(true);
         RepoFactory.getRepoInstance()
-                .getRestaurants()
-                .observe(this, response->{
+                .getMenu(null)
+                .observe(this,response->{
                     if (response == null) return;
                     if (response.isSuccessful()){
-                        mAdapter = new RestaurantsAdapter(response.data);
-                        recyclerView.setAdapter(mAdapter);
+                        MenuAdapter adapter = new MenuAdapter(response.data);
+                        recyclerView.setAdapter(adapter);
                     }
                 });
-        return view;
+        return rootView;
     }
 
 }

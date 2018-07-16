@@ -5,36 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center_horizontal"
-    tools:context=".ui.cart.CartViewFragment">
+    android:gravity="center_horizontal">
 
     <android.support.design.card.MaterialCardView
-        app:cardBackgroundColor="@color/green"
+        app:cardBackgroundColor="@color/white"
         app:cardElevation="4dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <android.support.design.card.MaterialCardView
-            android:layout_gravity="center"
-            android:layout_margin="4dp"
-            app:contentPadding="4dp"
-            app:cardCornerRadius="8dp"
-            app:cardBackgroundColor="#dfffffff"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:padding="8dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <LinearLayout
-                android:gravity="center_horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:textStyle="bold"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                    android:id="@+id/tvRestaurantName"
-                    android:textColor="@color/colorPrimary"
-                    android:text="fdgsdgd"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-        </android.support.design.card.MaterialCardView>
+            <TextView
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:id="@+id/tvRestaurantName"
+                android:textColor="@color/black"
+                android:text="fdgsdgd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
 
     </android.support.design.card.MaterialCardView>
 

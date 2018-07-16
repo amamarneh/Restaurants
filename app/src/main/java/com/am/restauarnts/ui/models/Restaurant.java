@@ -3,40 +3,37 @@ package com.am.restauarnts.ui.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.am.restauarnts.data.model.RestaurantEntity;
+
 
 /**
  * Created by ALa on 3/13/2018.
  */
 
 public class Restaurant implements Parcelable{
+    private int id;
     private String name;
-    private String imgUrl;
-    private boolean isOpen;
+    private String image;
+    private String info;
+    private String addressName;
 
-    public boolean isOpen() {
-        return isOpen;
+    public Restaurant() {
+    }
+    public Restaurant(RestaurantEntity restaurantEntity) {
+        this.id = restaurantEntity.getId();
+        this.name = restaurantEntity.getName();
+        this.image = restaurantEntity.getImage();
+        this.info = restaurantEntity.getInfo();
+        this.addressName = restaurantEntity.getAddress_name();
     }
 
-    public void setOpen(boolean open) {
-        isOpen = open;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-
-    private String id;
 
     protected Restaurant(Parcel in) {
+        id = in.readInt();
         name = in.readString();
-        imgUrl = in.readString();
-        ImgLargeUrl = in.readString();
-        id = in.readString();
+        image = in.readString();
+        info = in.readString();
+        addressName = in.readString();
     }
 
     public static final Creator<Restaurant> CREATOR = new Creator<Restaurant>() {
@@ -51,15 +48,13 @@ public class Restaurant implements Parcelable{
         }
     };
 
-    public String getImgLargeUrl() {
-        return ImgLargeUrl;
+    public int getId() {
+        return id;
     }
 
-    public void setImgLargeUrl(String imgLargeUrl) {
-        ImgLargeUrl = imgLargeUrl;
+    public void setId(int id) {
+        this.id = id;
     }
-
-    private String ImgLargeUrl;
 
     public String getName() {
         return name;
@@ -69,15 +64,28 @@ public class Restaurant implements Parcelable{
         this.name = name;
     }
 
-    public String getImgUrl() {
-        return imgUrl;
+    public String getImage() {
+        return image;
     }
 
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
+    public void setImage(String image) {
+        this.image = image;
     }
 
-    public Restaurant() {
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
+    }
+
+    public String getAddressName() {
+        return addressName;
+    }
+
+    public void setAddressName(String addressName) {
+        this.addressName = addressName;
     }
 
     @Override
@@ -86,10 +94,11 @@ public class Restaurant implements Parcelable{
     }
 
     @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(name);
-        dest.writeString(imgUrl);
-        dest.writeString(ImgLargeUrl);
-        dest.writeString(id);
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(id);
+        parcel.writeString(name);
+        parcel.writeString(image);
+        parcel.writeString(info);
+        parcel.writeString(addressName);
     }
 }

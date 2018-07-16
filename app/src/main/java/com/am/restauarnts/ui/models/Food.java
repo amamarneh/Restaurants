@@ -2,6 +2,10 @@ package com.am.restauarnts.ui.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import com.am.restauarnts.data.model.FoodEntity;
+import com.am.restauarnts.data.model.OptionEntity;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,67 +13,46 @@ import java.util.List;
  * Created by ALa on 3/13/2018.
  */
 
-public class Food implements Parcelable{
-    private String name,description,imgUrl;
-    private List<Food> foodCats;
-    private String id;
-    private Restaurant restaurant;
+public class Food{
+    private int id;
+    private String name;
+    private String image;
+    private String description;
+    private float price;
+    private int categoryId;
+    private int restaurantId;
+    private List<Food> mandatory;
+    private List<OptionEntity> options;
 
-    protected Food(Parcel in) {
-        name = in.readString();
-        description = in.readString();
-        imgUrl = in.readString();
-        foodCats = in.createTypedArrayList(Food.CREATOR);
-        id = in.readString();
-        restaurant = in.readParcelable(Restaurant.class.getClassLoader());
-        prevPrice = in.readFloat();
-        newPrice = in.readFloat();
+    public Food() {
     }
-
-    public static final Creator<Food> CREATOR = new Creator<Food>() {
-        @Override
-        public Food createFromParcel(Parcel in) {
-            return new Food(in);
+    public Food(FoodEntity foodEntity) {
+        this.id = foodEntity.getId();
+        this.name = foodEntity.getName();
+        this.description = foodEntity.getDescription();
+        this.price = foodEntity.getPrice();
+        this.categoryId = foodEntity.getCategory_id();
+        this.restaurantId = foodEntity.getRestaurant_id();
+        this.restaurantId = foodEntity.getRestaurant_id();
+        this.image = foodEntity.getImage();
+        if (foodEntity.getMandatory() != null){
+            this.mandatory =new ArrayList<>(foodEntity.getMandatory().size());
+            for (FoodEntity f :
+                    foodEntity.getMandatory()) {
+                this.mandatory.add(new Food(f));
+            }
         }
 
-        @Override
-        public Food[] newArray(int size) {
-            return new Food[size];
-        }
-    };
-
-    public Restaurant getRestaurant() {
-        return restaurant;
     }
 
-    public void setRestaurant(Restaurant restaurant) {
-        this.restaurant = restaurant;
-    }
+    public int getId() {
 
-    public Food(){}
-
-
-    public String getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
-
-
-
-
-    public List<Food> getFoodCats() {
-        return foodCats;
-    }
-
-    public void setFoodCats(List<Food> foodCats) {
-        this.foodCats = foodCats;
-    }
-
-
-    private float prevPrice,newPrice;// previous price can be null, we look at the new price
 
     public String getName() {
         return name;
@@ -77,6 +60,14 @@ public class Food implements Parcelable{
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getDescription() {
@@ -87,54 +78,43 @@ public class Food implements Parcelable{
         this.description = description;
     }
 
-    public String getImgUrl() {
-        return imgUrl;
+    public float getPrice() {
+        return price;
     }
 
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
+    public void setPrice(float price) {
+        this.price = price;
     }
 
-    public float getPrevPrice() {
-        return prevPrice;
+    public int getCategoryId() {
+        return categoryId;
     }
 
-    public void setPrevPrice(float prevPrice) {
-        this.prevPrice = prevPrice;
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 
-    public float getNewPrice() {
-        return newPrice;
+    public int getRestaurantId() {
+        return restaurantId;
     }
 
-    public void setNewPrice(float newPrice) {
-        this.newPrice = newPrice;
+    public void setRestaurantId(int restaurantId) {
+        this.restaurantId = restaurantId;
     }
 
-
-
-
-    public void addCat(Food food){
-        if(foodCats == null)
-            foodCats = new ArrayList<>();
-        foodCats.add(food);
+    public List<Food> getMandatory() {
+        return mandatory;
     }
 
-
-    @Override
-    public int describeContents() {
-        return 0;
+    public void setMandatory(List<Food> mandatory) {
+        this.mandatory = mandatory;
     }
 
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(name);
-        parcel.writeString(description);
-        parcel.writeString(imgUrl);
-        parcel.writeTypedList(foodCats);
-        parcel.writeString(id);
-        parcel.writeParcelable(restaurant, i);
-        parcel.writeFloat(prevPrice);
-        parcel.writeFloat(newPrice);
+    public List<OptionEntity> getOptions() {
+        return options;
+    }
+
+    public void setOptions(List<OptionEntity> options) {
+        this.options = options;
     }
 }
