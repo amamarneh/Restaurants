@@ -1,0 +1,197 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/food1"/>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/view_need_offset"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@android:color/transparent"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    </android.support.design.widget.CoordinatorLayout>
+
+    <android.support.design.card.MaterialCardView
+        android:layout_marginTop="-50dp"
+        android:layout_marginBottom="5dp"
+        android:layout_below="@id/imageView"
+        android:id="@+id/cardView"
+        app:cardMaxElevation="10dp"
+        app:cardElevation="4dp"
+        app:cardCornerRadius="8dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_weight="1"
+                android:padding="32dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tvName"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/roboto"
+                        android:text="Crispy Food"
+                        android:textColor="@color/black"
+                        android:textSize="30sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/tvPrice"
+                    android:layout_marginTop="4dp"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:text="12 NIS"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/tvInfo"
+                    android:fontFamily="@font/roboto"
+                    android:layout_marginTop="4dp"
+                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque aliquam commodo massa ac lobortis. "
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:layout_marginTop="16dp"
+                    android:id="@+id/recyclerViewCat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </android.support.v7.widget.RecyclerView>
+
+                <LinearLayout
+                    android:padding="16dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textSize="18sp"
+                        android:textColor="@color/black"
+                        android:text="Quantity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <LinearLayout
+                        android:layout_marginTop="4dp"
+                        android:orientation="horizontal"
+                        android:gravity="center_horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <android.support.design.card.MaterialCardView
+                            app:cardElevation="0dp"
+                            app:cardCornerRadius="8dp"
+                            app:strokeWidth="1dp"
+                            app:strokeColor="@color/gray"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <LinearLayout
+                                android:gravity="center"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <android.support.design.button.MaterialButton
+                                    android:gravity="center"
+                                    android:textAlignment="center"
+                                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                                    app:backgroundTint="@color/white"
+                                    android:textColor="@color/blue"
+                                    android:textStyle="bold"
+                                    android:textSize="20sp"
+                                    android:id="@+id/btnInc"
+                                    android:minWidth="40dp"
+                                    android:minHeight="40dp"
+                                    android:text="+"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                                <TextView
+                                    android:textColor="@color/black"
+                                    android:textAlignment="center"
+                                    android:layout_weight="1"
+                                    android:textSize="18sp"
+                                    android:id="@+id/tvQuantity"
+                                    android:text="1"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content" />
+                                <android.support.design.button.MaterialButton
+                                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                                    app:backgroundTint="@color/white"
+                                    android:textColor="@color/blue"
+                                    android:textStyle="bold"
+                                    android:textSize="20sp"
+                                    android:id="@+id/btnDec"
+                                    android:text="-"
+                                    android:minWidth="40dp"
+                                    android:minHeight="40dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"/>
+                            </LinearLayout> <!-- inc, dec  -->
+                        </android.support.design.card.MaterialCardView>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <EditText
+                    android:textSize="12sp"
+                    android:id="@+id/txtSpecialRequest"
+                    android:hint="special request(optional)"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <android.support.design.button.MaterialButton
+                        android:id="@+id/btnAddToCart"
+                        android:text="Add to cart"
+                        app:backgroundTint="@color/green"
+                        style="@style/Widget.MaterialComponents.Button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </android.support.design.card.MaterialCardView>
+
+</RelativeLayout>
+</ScrollView>

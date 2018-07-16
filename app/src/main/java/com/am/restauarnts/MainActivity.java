@@ -5,6 +5,7 @@ package com.am.restauarnts;
         import android.os.Bundle;
 
         import com.am.restauarnts.ui.activities.HomeActivity;
+        import com.am.restauarnts.ui.models.Cart;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -12,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main); //a
+        Cart.getCart(this).clear(this);
         startActivity(new Intent(this, HomeActivity.class));
     }
 }

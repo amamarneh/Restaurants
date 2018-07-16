@@ -98,6 +98,7 @@ public class CartViewFragment extends Fragment implements CartItemsAdapter.CartA
         if(cart.isEmpty())
             return;
         tvTotal.setText(cart.getPrice()+" NIS");
-        tvRestaurantName.setText(cart.getRestaurant().getName());
+        if (cart.getRestaurant() != null)
+            tvRestaurantName.setText(cart.getRestaurant().getName());
     }
 }

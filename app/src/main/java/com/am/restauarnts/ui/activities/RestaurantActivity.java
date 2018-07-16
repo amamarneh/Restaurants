@@ -13,6 +13,8 @@ import android.widget.TextView;
 import com.am.restauarnts.R;
 import com.am.restauarnts.ui.adapters.SectionsPagerAdapter;
 import com.am.restauarnts.ui.base.BaseActivity;
+import com.am.restauarnts.ui.fragments.CartFragment;
+import com.am.restauarnts.ui.models.Cart;
 import com.am.restauarnts.ui.models.Restaurant;
 import com.bumptech.glide.Glide;
 
@@ -21,7 +23,7 @@ import org.w3c.dom.Text;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class RestaurantActivity extends BaseActivity {
+public class RestaurantActivity extends BaseActivity implements CartFragment.OnFragmentInteractionListener{
 
     @BindView(R.id.imageView)
     ImageView imageView;
@@ -37,31 +39,56 @@ public class RestaurantActivity extends BaseActivity {
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
     private Restaurant mRestaurant;
+    private CartFragment cartFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant);
         setupBackArrow();
         ButterKnife.bind(this);
+        mRestaurant = getIntent().getParcelableExtra("model");
 
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(),mRestaurant);
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 //        tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
         tabLayout.setupWithViewPager(mViewPager);
-        mRestaurant = getIntent().getParcelableExtra("model");
+
         setTitle(mRestaurant.getName());
         tvName.setText(mRestaurant.getName());
         tvInfo.setText(mRestaurant.getInfo() );
         tvShortInfo.setText(mRestaurant.getInfo());
         Glide.with(this).load(mRestaurant.getImage()).into(imageView);
 
+        if (savedInstanceState == null){
+//            cartFragment = (CartFragment) getSupportFragmentManager().findFragmentByTag(CartFragment.TAG);
+            cartFragment = new CartFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.contentCart, cartFragment ,CartFragment.TAG)
+                    .commit();
+        }
+
+
+
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        refreshCart();
+    }
+    private void refreshCart(){
+        if(cartFragment != null)
+            cartFragment.refresh();
     }
     public static Intent getForRestaurant(Context context, Restaurant restaurant){
         Intent intent = new Intent(context,RestaurantActivity.class);
         intent.putExtra("model",restaurant);
         return intent;
+    }
+
+    @Override
+    public void onCartFragmentClicked() {
+
     }
 }

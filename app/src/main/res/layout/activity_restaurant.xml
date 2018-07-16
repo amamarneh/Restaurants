@@ -93,7 +93,11 @@
 
 
         </android.support.design.widget.CollapsingToolbarLayout>
-
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider" />
         <android.support.design.widget.TabLayout
             app:tabTextColor="@color/gray"
             app:tabSelectedTextColor="@color/black"
@@ -115,6 +119,8 @@
                 android:text="@string/tab_text_2" />
 
         </android.support.design.widget.TabLayout>
+
+
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.view.ViewPager
@@ -123,5 +129,11 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
+    <FrameLayout
+        android:layout_gravity="bottom"
+        android:id="@+id/contentCart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
+    </FrameLayout>
 </android.support.design.widget.CoordinatorLayout>

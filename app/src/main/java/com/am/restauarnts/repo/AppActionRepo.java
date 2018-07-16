@@ -51,7 +51,7 @@ public class AppActionRepo implements ActionRepo {
                         if (response.getCategories() != null){
                             for (CategoryEntity c :
                                     response.getCategories()) {
-                                list.add(new MenuItemModel(c));
+                                list.add(new MenuItemModel(c,restaurant));
                             }
                         }
                         task.success(list);

@@ -10,11 +10,12 @@ public class MenuItemModel {
     private boolean expanded;
     private String name;
     private List<Food> foods;
-
+    private Restaurant restaurant;
     public MenuItemModel() {
     }
-    public MenuItemModel(CategoryEntity categoryEntity) {
+    public MenuItemModel(CategoryEntity categoryEntity, Restaurant restaurant) {
         this.name = categoryEntity.getName();
+        this.restaurant =restaurant;
         if (categoryEntity.getFood() != null){
             this.foods = new ArrayList<>(categoryEntity.getFood().size());
             for (FoodEntity f :
@@ -23,6 +24,14 @@ public class MenuItemModel {
             }
         }
 
+    }
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
     }
 
     public List<Food> getFoods() {

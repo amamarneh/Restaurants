@@ -2,6 +2,7 @@ package com.am.restauarnts.ui.fragments;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,16 +13,32 @@ import android.view.ViewGroup;
 import com.am.restauarnts.R;
 import com.am.restauarnts.repo.RepoFactory;
 import com.am.restauarnts.ui.adapters.MenuAdapter;
+import com.am.restauarnts.ui.models.Restaurant;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class RestaurantMenuFragment extends Fragment {
-
+    public static final String PARAM_RESTAURANT = "PARAM_RESTAURANT";
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 
+    private Restaurant mRestaurant;
     public RestaurantMenuFragment() {
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null)
+            mRestaurant = getArguments().getParcelable(PARAM_RESTAURANT);
+    }
+    public static RestaurantMenuFragment getInstance(Restaurant restaurant){
+        RestaurantMenuFragment fragment = new RestaurantMenuFragment();
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(PARAM_RESTAURANT,restaurant);
+        fragment.setArguments(bundle);
+        return fragment;
     }
 
     @Override
@@ -31,7 +48,7 @@ public class RestaurantMenuFragment extends Fragment {
         ButterKnife.bind(this,rootView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         RepoFactory.getRepoInstance()
-                .getMenu(null)
+                .getMenu(mRestaurant)
                 .observe(this,response->{
                     if (response == null) return;
                     if (response.isSuccessful()){

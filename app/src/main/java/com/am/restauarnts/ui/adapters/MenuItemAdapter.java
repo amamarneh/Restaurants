@@ -11,8 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.am.restauarnts.R;
+import com.am.restauarnts.ui.activities.FoodDetailsActivity;
 import com.am.restauarnts.ui.base.BaseViewHolder;
 import com.am.restauarnts.ui.models.Food;
+import com.am.restauarnts.ui.models.Restaurant;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
@@ -22,9 +24,10 @@ import butterknife.ButterKnife;
 
 public class MenuItemAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     private List<Food> items;
-
-    public MenuItemAdapter(List<Food> items) {
+    private Restaurant mRestaurant;
+    public MenuItemAdapter(List<Food> items, Restaurant restaurant) {
         this.items = items;
+        this.mRestaurant = restaurant;
     }
 
     @NonNull
@@ -69,6 +72,8 @@ public class MenuItemAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             Glide.with(itemView.getContext()).load(items.get(position).getImage()).into(imageView);
 
             layout.setOnClickListener(view -> {
+                Intent i = FoodDetailsActivity.getForFood(itemView.getContext(),items.get(getAdapterPosition()),mRestaurant);
+                itemView.getContext().startActivity(i);
             });
         }
     }

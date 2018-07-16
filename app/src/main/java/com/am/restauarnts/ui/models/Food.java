@@ -13,7 +13,7 @@ import java.util.List;
  * Created by ALa on 3/13/2018.
  */
 
-public class Food{
+public class Food implements Parcelable{
     private int id;
     private String name;
     private String image;
@@ -22,7 +22,7 @@ public class Food{
     private int categoryId;
     private int restaurantId;
     private List<Food> mandatory;
-    private List<OptionEntity> options;
+    private List<Option> options;
 
     public Food() {
     }
@@ -44,6 +44,33 @@ public class Food{
         }
 
     }
+    public boolean hasMandatory(){
+        return this.mandatory != null && !this.mandatory.isEmpty();
+    }
+
+    protected Food(Parcel in) {
+        id = in.readInt();
+        name = in.readString();
+        image = in.readString();
+        description = in.readString();
+        price = in.readFloat();
+        categoryId = in.readInt();
+        restaurantId = in.readInt();
+        mandatory = in.createTypedArrayList(Food.CREATOR);
+        options = in.createTypedArrayList(Option.CREATOR);
+    }
+
+    public static final Creator<Food> CREATOR = new Creator<Food>() {
+        @Override
+        public Food createFromParcel(Parcel in) {
+            return new Food(in);
+        }
+
+        @Override
+        public Food[] newArray(int size) {
+            return new Food[size];
+        }
+    };
 
     public int getId() {
 
@@ -110,11 +137,29 @@ public class Food{
         this.mandatory = mandatory;
     }
 
-    public List<OptionEntity> getOptions() {
+    public List<Option> getOptions() {
         return options;
     }
 
-    public void setOptions(List<OptionEntity> options) {
+    public void setOptions(List<Option> options) {
         this.options = options;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(id);
+        parcel.writeString(name);
+        parcel.writeString(image);
+        parcel.writeString(description);
+        parcel.writeFloat(price);
+        parcel.writeInt(categoryId);
+        parcel.writeInt(restaurantId);
+        parcel.writeTypedList(mandatory);
+        parcel.writeTypedList(options);
     }
 }

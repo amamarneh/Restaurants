@@ -70,7 +70,7 @@ public class MenuAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
             if(items.get(position).isExpanded()) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(itemView.getContext()));
-                MenuItemAdapter adapter = new MenuItemAdapter(items.get(position).getFoods());
+                MenuItemAdapter adapter = new MenuItemAdapter(items.get(position).getFoods(),items.get(position).getRestaurant());
                 LinearLayoutManager layoutManager = new LinearLayoutManager(itemView.getContext());
                 recyclerView.setLayoutManager(layoutManager);
                 recyclerView.setAdapter(adapter);

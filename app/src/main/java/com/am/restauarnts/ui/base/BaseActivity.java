@@ -18,7 +18,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
     protected void setupBackArrow(){
         if(getSupportActionBar()!=null)
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

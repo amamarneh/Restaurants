@@ -21,4 +21,10 @@ public class CartUtil{
         editor.putString("cartJson",new Gson().toJson(cart));
         editor.apply();
     }
+    public static void clearCart(Context context){
+        SharedPreferences sp = context.getSharedPreferences("cart",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.remove("cartJson");
+        editor.apply();
+    }
 }

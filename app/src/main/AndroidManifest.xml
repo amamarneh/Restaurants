@@ -27,7 +27,10 @@
         <activity
             android:name=".ui.activities.Main2Activity"
             android:label="@string/title_activity_main2"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ui.activities.FoodDetailsActivity"
+            android:theme="@style/AppTheme.NoActionBarHome">
+        </activity>
     </application>
 
 </manifest>

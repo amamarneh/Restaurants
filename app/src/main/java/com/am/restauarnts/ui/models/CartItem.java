@@ -1,5 +1,6 @@
 package com.am.restauarnts.ui.models;
 
+import java.util.List;
 import java.util.UUID;
 
 public class CartItem {
@@ -16,6 +17,15 @@ public class CartItem {
     private Food food;
     private int quantity;
     private String message;
+    private List<Option> options;
+
+    public List<Option> getOptions() {
+        return options;
+    }
+
+    public void setOptions(List<Option> options) {
+        this.options = options;
+    }
 
     public String getMessage() {
         return message;
