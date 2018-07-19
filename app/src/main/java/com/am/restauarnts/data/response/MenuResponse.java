@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class MenuResponse {
+public class MenuResponse extends ServerResponse{
 
     @SerializedName("records")
     private List<CategoryEntity> categories;

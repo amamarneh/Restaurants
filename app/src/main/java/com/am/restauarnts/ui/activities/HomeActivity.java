@@ -1,5 +1,6 @@
 package com.am.restauarnts.ui.activities;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -10,10 +11,12 @@ import android.view.MenuItem;
 
 import com.am.restauarnts.R;
 import com.am.restauarnts.ui.fragments.CartViewFragment;
+import com.am.restauarnts.ui.fragments.ProfileFragment;
 import com.am.restauarnts.ui.fragments.RestaurantsFragment;
+import com.am.restauarnts.ui.models.Cart;
 import com.jaeger.library.StatusBarUtil;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements CartViewFragment.OnFragmentInteractionListener {
 
     private Fragment mFragment;
     @Override
@@ -40,7 +43,7 @@ public class HomeActivity extends AppCompatActivity {
                                 setTitle("Cart");
                                 break;
                             case R.id.action_profile:
-//                                replaceFragment(new ProfileFragment(),false);
+                                replaceFragment(new ProfileFragment(),false);
                                 setTitle("Profile");
                                 break;
                         }
@@ -58,5 +61,17 @@ public class HomeActivity extends AppCompatActivity {
             fm.beginTransaction().replace(R.id.content,fragment).addToBackStack(null).commit();
         else
             fm.beginTransaction().replace(R.id.content,fragment).commit();
+    }
+
+    @Override
+    public void onCartSendClicked() {
+        Intent i = new Intent(this, AddressActivity.class);
+        startActivity(i);
+    }
+
+    @Override
+    public void onCartAddClicked() {
+        Intent i = RestaurantActivity.getForRestaurant(this, Cart.getCart(this).getRestaurant());
+        startActivity(i);
     }
 }

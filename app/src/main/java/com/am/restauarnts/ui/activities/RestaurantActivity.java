@@ -63,7 +63,6 @@ public class RestaurantActivity extends BaseActivity implements CartFragment.OnF
         Glide.with(this).load(mRestaurant.getImage()).into(imageView);
 
         if (savedInstanceState == null){
-//            cartFragment = (CartFragment) getSupportFragmentManager().findFragmentByTag(CartFragment.TAG);
             cartFragment = new CartFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.contentCart, cartFragment ,CartFragment.TAG)
                     .commit();
@@ -89,6 +88,7 @@ public class RestaurantActivity extends BaseActivity implements CartFragment.OnF
 
     @Override
     public void onCartFragmentClicked() {
-
+        Intent intent = new Intent(this,CartActivity.class);
+        startActivity(intent);
     }
 }

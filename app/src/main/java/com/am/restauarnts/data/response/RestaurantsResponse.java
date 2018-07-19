@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class RestaurantsResponse {
+public class RestaurantsResponse extends ServerResponse {
 
     @SerializedName("records")
     private List<RestaurantEntity> restaurantEntities;

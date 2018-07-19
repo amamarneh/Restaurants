@@ -1,6 +1,7 @@
 package com.am.restauarnts.ui.fragments;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -18,6 +19,8 @@ import android.widget.TextView;
 
 
 import com.am.restauarnts.R;
+import com.am.restauarnts.ui.activities.AddressActivity;
+import com.am.restauarnts.ui.activities.RestaurantActivity;
 import com.am.restauarnts.ui.adapters.CartItemsAdapter;
 import com.am.restauarnts.ui.models.Cart;
 
@@ -28,7 +31,7 @@ public class CartViewFragment extends Fragment implements CartItemsAdapter.CartA
 
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
-
+    private OnFragmentInteractionListener mListener;
     private RecyclerView recyclerView;
     private Button btnAddItems, btnSendOrder;
     private CartItemsAdapter mAdapter;
@@ -71,10 +74,10 @@ public class CartViewFragment extends Fragment implements CartItemsAdapter.CartA
         onCartItemsChanged();
 
         btnSendOrder.setOnClickListener(view1 -> {
-
+            mListener.onCartSendClicked();
         });
         btnAddItems.setOnClickListener(view1 -> {
-
+            mListener.onCartAddClicked();
         });
     }
 
@@ -86,8 +89,8 @@ public class CartViewFragment extends Fragment implements CartItemsAdapter.CartA
             tvRestaurantName.setVisibility(View.GONE);
         }else {
             tvRestaurantName.setVisibility(View.VISIBLE);
-            progressBar.setVisibility(View.VISIBLE);
-            cardRestaurantOpen.setVisibility(View.GONE);
+            progressBar.setVisibility(View.GONE);
+            cardRestaurantOpen.setVisibility(View.VISIBLE);
             cardRestaurantClosed.setVisibility(View.GONE);
         }
     }
@@ -100,5 +103,25 @@ public class CartViewFragment extends Fragment implements CartItemsAdapter.CartA
         tvTotal.setText(cart.getPrice()+" NIS");
         if (cart.getRestaurant() != null)
             tvRestaurantName.setText(cart.getRestaurant().getName());
+    }
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+    public interface OnFragmentInteractionListener {
+        void onCartSendClicked();
+        void onCartAddClicked();
     }
 }

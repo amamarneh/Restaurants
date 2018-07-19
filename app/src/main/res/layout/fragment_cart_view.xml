@@ -20,7 +20,7 @@
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                 android:id="@+id/tvRestaurantName"
                 android:textColor="@color/black"
-                android:text="fdgsdgd"
+                android:text=""
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
@@ -53,6 +53,7 @@
             android:orientation="vertical">
 
             <ProgressBar
+                android:visibility="gone"
                 android:id="@+id/progressBar"
                 style="?android:attr/progressBarStyle"
                 android:layout_width="match_parent"
