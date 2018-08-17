@@ -27,6 +27,7 @@ import com.am.restauarnts.ui.models.OrderBriefModel;
 import com.am.restauarnts.ui.models.OrderDetailsItem;
 import com.am.restauarnts.ui.models.OrderDetailsModel;
 import com.am.restauarnts.ui.models.Restaurant;
+import com.am.restauarnts.ui.models.TopFood;
 import com.am.restauarnts.utils.DateUtils;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.ParsedRequestListener;
@@ -188,6 +189,27 @@ public class AppActionRepo implements ActionRepo {
                         task.error(anError.getMessage());
                     }
                 });
+        return task;
+    }
+
+    @Override
+    public LiveTask<List<TopFood>> getTop() {
+        TopFood food = new TopFood();
+        food.setName("Top food 1");
+        food.setPrice(3);
+        food.setRestaurantName("Havana Restaurant");
+
+        TopFood food2 = new TopFood();
+        food2.setName("Top food 2");
+        food2.setPrice(32);
+        food2.setRestaurantName("Havana Restaurant");
+
+        List<TopFood> list = new ArrayList<>();
+        list.add(food);
+        list.add(food2);
+
+        LiveTask<List<TopFood>> task =new LiveTask<>();
+        task.success(list);
         return task;
     }
 }

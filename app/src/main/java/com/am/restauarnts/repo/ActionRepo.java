@@ -4,11 +4,13 @@ import com.am.restauarnts.task.LiveTask;
 import com.am.restauarnts.task.SingleLiveTask;
 import com.am.restauarnts.ui.buychat.model.BuyMessage;
 import com.am.restauarnts.ui.models.Cart;
+import com.am.restauarnts.ui.models.Food;
 import com.am.restauarnts.ui.models.MenuItemModel;
 import com.am.restauarnts.ui.models.Order;
 import com.am.restauarnts.ui.models.OrderBriefModel;
 import com.am.restauarnts.ui.models.OrderDetailsModel;
 import com.am.restauarnts.ui.models.Restaurant;
+import com.am.restauarnts.ui.models.TopFood;
 
 import java.util.List;
 
@@ -19,4 +21,5 @@ public interface ActionRepo {
     SingleLiveTask<Void> sendMessage(String chatId, BuyMessage message);
     LiveTask<OrderDetailsModel> getOrderDetails(int orderId);
     LiveTask<List<OrderBriefModel>> getMyOrders();
+    LiveTask<List<TopFood>> getTop();
 }

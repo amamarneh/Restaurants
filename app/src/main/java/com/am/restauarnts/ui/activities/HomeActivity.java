@@ -8,22 +8,31 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.am.restauarnts.R;
 import com.am.restauarnts.ui.fragments.CartViewFragment;
+import com.am.restauarnts.ui.fragments.HomeFragment;
 import com.am.restauarnts.ui.fragments.ProfileFragment;
 import com.am.restauarnts.ui.fragments.RestaurantsFragment;
 import com.am.restauarnts.ui.models.Cart;
 import com.jaeger.library.StatusBarUtil;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class HomeActivity extends AppCompatActivity implements CartViewFragment.OnFragmentInteractionListener {
 
+    @BindView(R.id.tvTitle)
+    TextView tvTitle;
     private Fragment mFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        StatusBarUtil.setTranslucentForImageView(this,0,findViewById(R.id.view_need_offset));
+        setSupportActionBar(findViewById(R.id.toolbar));
+        ButterKnife.bind(this);
+//        StatusBarUtil.setTranslucentForImageView(this,0,findViewById(R.id.view_need_offset));
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView)
                 findViewById(R.id.bottom_navigation);
@@ -36,7 +45,7 @@ public class HomeActivity extends AppCompatActivity implements CartViewFragment.
                         switch (item.getItemId()) {
                             case R.id.action_explore:
                                 replaceFragment(new RestaurantsFragment(),false);
-                                setTitle("Discover\nRestaurants");
+                                setTitle("Discover Restaurants");
                                 break;
                             case R.id.action_cart:
                                 replaceFragment(new CartViewFragment(),false);
@@ -46,6 +55,10 @@ public class HomeActivity extends AppCompatActivity implements CartViewFragment.
                                 replaceFragment(new ProfileFragment(),false);
                                 setTitle("Profile");
                                 break;
+                            case R.id.action_home:
+                                replaceFragment(new HomeFragment(),false);
+                                setTitle("Home");
+                                break;
                         }
                         return true;
                     }
@@ -54,6 +67,12 @@ public class HomeActivity extends AppCompatActivity implements CartViewFragment.
         replaceFragment(new RestaurantsFragment(),false);// main fragment
         setTitle("Top");
     }
+
+    @Override
+    public void setTitle(CharSequence title) {
+        tvTitle.setText(title);
+    }
+
     protected void replaceFragment(Fragment fragment, boolean addToStack){
         mFragment = fragment;
         FragmentManager fm = getSupportFragmentManager();
