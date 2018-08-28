@@ -10,11 +10,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.am.restauarnts.R;
 import com.am.restauarnts.repo.RepoFactory;
 import com.am.restauarnts.task.LiveResponse;
 import com.am.restauarnts.ui.adapters.RestaurantsAdapter;
+import com.am.restauarnts.ui.base.BaseFragment;
 import com.am.restauarnts.ui.models.Restaurant;
 
 import java.util.List;
@@ -22,10 +24,12 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class RestaurantsFragment extends Fragment {
+public class RestaurantsFragment extends BaseFragment {
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
+    @BindView(R.id.loadingBar)
+    ProgressBar loadingBar;
 
     private RecyclerView.Adapter mAdapter;
 
@@ -40,13 +44,17 @@ public class RestaurantsFragment extends Fragment {
         ButterKnife.bind(this,view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
+
+        loadingBar.setVisibility(View.VISIBLE);
         RepoFactory.getRepoInstance()
                 .getRestaurants()
                 .observe(this, response->{
                     if (response == null) return;
+                    loadingBar.setVisibility(View.GONE);
                     if (response.isSuccessful()){
                         mAdapter = new RestaurantsAdapter(response.data);
                         recyclerView.setAdapter(mAdapter);
+                        runLayoutAnimation(recyclerView);
                     }
                 });
         return view;

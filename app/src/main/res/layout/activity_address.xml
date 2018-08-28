@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="8dp"
-    tools:context=".ui.address.AddressActivity">
+    tools:context=".ui.activities.AddressActivity">
 
     <android.support.design.widget.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
@@ -60,7 +60,7 @@
     <android.support.design.button.MaterialButton
         android:id="@+id/btnSendOrder"
         android:layout_marginTop="4dp"
-        app:backgroundTint="@color/green"
+        app:backgroundTint="@color/cart"
         style="@style/Widget.MaterialComponents.Button"
         android:text="Send Order"
         android:layout_width="match_parent"

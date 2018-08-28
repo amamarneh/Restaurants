@@ -1,7 +1,7 @@
 <LinearLayout
     android:clickable="true"
     android:id="@+id/layoutCart"
-    android:background="@color/green"
+    android:background="@color/cart"
     android:padding="10dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"

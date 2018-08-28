@@ -72,8 +72,12 @@ public class MenuItemAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             Glide.with(itemView.getContext()).load(items.get(position).getImage()).into(imageView);
 
             layout.setOnClickListener(view -> {
-                Intent i = FoodDetailsActivity.getForFood(itemView.getContext(),items.get(getAdapterPosition()),mRestaurant);
-                itemView.getContext().startActivity(i);
+                //check if the restaurant has delivery option
+                if (mRestaurant.isDelivery()){
+                    Intent i = FoodDetailsActivity.getForFood(itemView.getContext(),items.get(getAdapterPosition()),mRestaurant);
+                    itemView.getContext().startActivity(i);
+                }
+
             });
         }
     }

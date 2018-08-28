@@ -56,6 +56,8 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         TextView tvInfo;
         @BindView(R.id.imageView)
         ImageView imageView;
+        @BindView(R.id.tvStatus)
+        TextView tvStatus;
 
         public ItemHolder(View itemView) {
             super(itemView);
@@ -66,6 +68,7 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         public void onBind(int position) {
             tvRestaurantName.setText(items.get(position).getName());
             tvInfo.setText(items.get(position).getInfo());
+            tvStatus.setText(items.get(position).isOpen()?"OPEN":"CLOSED");
             Glide.with(itemView.getContext()).load(items.get(position).getImage())
                     .apply(RequestOptions.placeholderOf(R.drawable.food1))
                     .into(imageView);

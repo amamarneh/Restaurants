@@ -6,6 +6,9 @@ public class RestaurantEntity {
     private String image;
     private String info;
     private String address_name;
+    private int is_delivery;
+    private int status;
+    private String open_hours;
 
     public int getId() {
         return id;
@@ -43,7 +46,31 @@ public class RestaurantEntity {
         return address_name;
     }
 
+    public int getIs_delivery() {
+        return is_delivery;
+    }
+
+    public void setIs_delivery(int is_delivery) {
+        this.is_delivery = is_delivery;
+    }
+
     public void setAddress_name(String address_name) {
         this.address_name = address_name;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public String getOpen_hours() {
+        return open_hours;
+    }
+
+    public void setOpen_hours(String open_hours) {
+        this.open_hours = open_hours;
     }
 }

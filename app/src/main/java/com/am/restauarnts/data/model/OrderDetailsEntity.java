@@ -7,6 +7,7 @@ public class OrderDetailsEntity {
     private String created;
     private RestaurantEntity restaurant;
     private float total_price;
+    private int status;
     private List<OrderDetailsItemEntity> items;
 
     public int getId() {
@@ -31,6 +32,14 @@ public class OrderDetailsEntity {
 
     public void setRestaurant(RestaurantEntity restaurant) {
         this.restaurant = restaurant;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public float getTotal_price() {

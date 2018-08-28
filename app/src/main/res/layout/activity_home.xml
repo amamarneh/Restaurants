@@ -9,33 +9,38 @@
         tools:context=".ui.activities.HomeActivity">
 
         <android.support.design.widget.AppBarLayout
-            app:elevation="0dp"
+            android:theme="@style/AppTheme.AppBarOverlay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
+                app:contentInsetStart="0dp"
+                app:contentInsetEnd="0dp"
                 android:layout_width="match_parent"
                 app:layout_collapseMode="pin"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 android:layout_height="wrap_content"
-                android:background="@android:color/white"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+                app:popupTheme="@style/AppTheme.PopupOverlay">
                 <LinearLayout
+                    android:layout_margin="4dp"
                     android:gravity="center_horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
                     <TextView
-                        android:textSize="18dp"
-                        android:textStyle="normal"
-                        android:textColor="@color/black"
+                        style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
                         android:id="@+id/tvTitle"
-                        android:text="@string/app_name"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:text="@string/app_name"
+                        android:textColor="@color/black" />
+
+
+
                 </LinearLayout>
             </android.support.v7.widget.Toolbar>
+
 
             <View
                 android:id="@+id/divider2"
@@ -51,21 +56,34 @@
             android:layout_height="match_parent">
             <FrameLayout
 
-                android:layout_above="@id/bottom_navigation"
+                android:layout_above="@id/layoutBar"
                 android:id="@+id/content"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
 
-            <android.support.design.widget.BottomNavigationView
-                android:layout_gravity="bottom"
-                app:elevation="4dp"
-                android:background="@android:color/white"
-                android:id="@+id/bottom_navigation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+            <LinearLayout
+                android:orientation="vertical"
+                android:id="@+id/layoutBar"
                 android:layout_alignParentBottom="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?android:attr/listDivider" />
+                <android.support.design.widget.BottomNavigationView
+                    android:layout_gravity="bottom"
+                    app:elevation="4dp"
+                    app:itemIconTint="@color/black"
+                    android:id="@+id/bottom_navigation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:menu="@menu/bottom_navigation_main" />
 
-                app:menu="@menu/bottom_navigation_main" />
+
+            </LinearLayout>
+
+
         </RelativeLayout>
 
 

@@ -25,7 +25,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
                 return RestaurantMenuFragment.getInstance(restaurant);
             case 1:
                 default:
-                return new RestaurantDetailsFragment();
+                return RestaurantDetailsFragment.getInstance(restaurant);
         }
     }
     @Override

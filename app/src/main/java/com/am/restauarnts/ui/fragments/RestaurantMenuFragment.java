@@ -13,12 +13,13 @@ import android.view.ViewGroup;
 import com.am.restauarnts.R;
 import com.am.restauarnts.repo.RepoFactory;
 import com.am.restauarnts.ui.adapters.MenuAdapter;
+import com.am.restauarnts.ui.base.BaseFragment;
 import com.am.restauarnts.ui.models.Restaurant;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class RestaurantMenuFragment extends Fragment {
+public class RestaurantMenuFragment extends BaseFragment {
     public static final String PARAM_RESTAURANT = "PARAM_RESTAURANT";
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
@@ -54,6 +55,7 @@ public class RestaurantMenuFragment extends Fragment {
                     if (response.isSuccessful()){
                         MenuAdapter adapter = new MenuAdapter(response.data);
                         recyclerView.setAdapter(adapter);
+                        runLayoutAnimation(recyclerView);
                     }
                 });
         return rootView;

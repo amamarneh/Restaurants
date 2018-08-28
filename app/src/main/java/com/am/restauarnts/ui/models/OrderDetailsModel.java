@@ -9,7 +9,15 @@ public class OrderDetailsModel {
     private Restaurant restaurant;
     private float totalPrice;
     private List<OrderDetailsItem> items;
+    private int status;
 
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
 
     public int getId() {
         return id;

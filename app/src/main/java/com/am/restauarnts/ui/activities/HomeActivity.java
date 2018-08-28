@@ -64,8 +64,8 @@ public class HomeActivity extends AppCompatActivity implements CartViewFragment.
                     }
                 });
 
-        replaceFragment(new RestaurantsFragment(),false);// main fragment
-        setTitle("Top");
+        replaceFragment(new HomeFragment(),false);// main fragment
+        setTitle("Home");
     }
 
     @Override

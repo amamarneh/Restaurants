@@ -6,16 +6,21 @@
     android:orientation="vertical"
     tools:context=".ui.fragments.HomeFragment">
     <LinearLayout
+        android:visibility="gone"
+        android:padding="4dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <EditText
+            android:padding="8dp"
+            android:background="@drawable/rouded_txt"
             android:id="@+id/txtSearch"
             android:hint="Search for"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
     <android.support.v7.widget.RecyclerView
+        android:layout_marginTop="4dp"
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">

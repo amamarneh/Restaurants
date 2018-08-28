@@ -1,10 +1,12 @@
 package com.am.restauarnts.data.model;
 
 public class OrderBriefEntity {
+    // for the top of the chat
     private int id;
     private String created;
     private float total_price;
     private int items_count;
+    private int status;
     private RestaurantEntity restaurant;
 
     public int getId() {
@@ -13,6 +15,14 @@ public class OrderBriefEntity {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public String getCreated() {

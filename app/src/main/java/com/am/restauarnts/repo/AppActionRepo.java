@@ -162,6 +162,7 @@ public class AppActionRepo implements ActionRepo {
                         model.setRestaurant(new Restaurant(response.getRecords().getRestaurant()));
                         model.setTotalPrice(response.getRecords().getTotal_price());
                         model.setItems(OrderDetailsItem.getAsList(response.getRecords().getItems()));
+                        model.setStatus(response.getRecords().getStatus());
                         task.success(model);
                     }
 
@@ -204,9 +205,17 @@ public class AppActionRepo implements ActionRepo {
         food2.setPrice(32);
         food2.setRestaurantName("Havana Restaurant");
 
+        TopFood food3 = new TopFood();
+        food3.setName("Top food 2");
+        food3.setPrice(31);
+        food3.setRestaurantName("Havana Restaurant");
+
+
         List<TopFood> list = new ArrayList<>();
         list.add(food);
         list.add(food2);
+        list.add(food2);
+        list.add(food3);
 
         LiveTask<List<TopFood>> task =new LiveTask<>();
         task.success(list);

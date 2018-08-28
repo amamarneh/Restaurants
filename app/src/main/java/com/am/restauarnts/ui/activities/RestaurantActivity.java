@@ -35,6 +35,8 @@ public class RestaurantActivity extends BaseActivity implements CartFragment.OnF
     TextView tvInfo;
     @BindView(R.id.ratingBar)
     RatingBar ratingBar;
+    @BindView(R.id.tvStatus)
+    TextView tvStatus;
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
@@ -58,8 +60,10 @@ public class RestaurantActivity extends BaseActivity implements CartFragment.OnF
 
         setTitle(mRestaurant.getName());
         tvName.setText(mRestaurant.getName());
-        tvInfo.setText(mRestaurant.getInfo() );
+        tvInfo.setText(mRestaurant.isDelivery() ? "Has delivery option" : "Doesn't have delivery option");
         tvShortInfo.setText(mRestaurant.getInfo());
+        tvStatus.setText(mRestaurant.isOpen()?"OPEN":"CLOSED");
+        ratingBar.setRating(mRestaurant.getStars());
         Glide.with(this).load(mRestaurant.getImage()).into(imageView);
 
         if (savedInstanceState == null){

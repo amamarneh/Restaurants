@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--<color name="colorPrimary">#ebebeb</color>  d74855 -->
+
     <color name="colorPrimary">#ebebeb</color>
-    <color name="colorPrimaryDark">#d7d7d7</color>
+    <color name="colorPrimaryDark">#ececec</color>
     <color name="colorAccent">#d74855</color>
 
     <color name="pink">#b577cc</color>
@@ -21,5 +23,9 @@
     <color name="bg">#dadada</color>
     <color name="pri_gray">#f2f4f6</color>
     <color name="bg1">#f4f5f6</color>
+    <color name="chat_color">#f4f5f6</color>
+    <color name="chat_color_info">#9ca6b1</color>
+
+    <color name="cart">#fe6e60</color>
 
 </resources>

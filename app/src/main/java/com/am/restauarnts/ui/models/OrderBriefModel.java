@@ -13,15 +13,21 @@ public class OrderBriefModel {
     private float totalPrice;
     private Restaurant restaurant;
     private int itemsCount;
+    private int status;
 
     public OrderBriefModel() {
     }
+
+
+
     public OrderBriefModel(OrderBriefEntity entity) {
         this.id = entity.getId();
         this.created = DateUtils.parseDate(entity.getCreated());
         this.totalPrice = entity.getTotal_price();
         this.restaurant = new Restaurant(entity.getRestaurant());
         this.itemsCount = entity.getItems_count();
+        this.status = entity.getStatus();
+
 
     }
     public static List<OrderBriefModel> getAsList(List<OrderBriefEntity> entities){
@@ -72,5 +78,12 @@ public class OrderBriefModel {
 
     public void setItemsCount(int itemsCount) {
         this.itemsCount = itemsCount;
+    }
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

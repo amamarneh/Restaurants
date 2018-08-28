@@ -1,13 +1,18 @@
 package com.am.restauarnts.ui.buychat;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.am.restauarnts.R;
@@ -18,6 +23,7 @@ import com.am.restauarnts.ui.buychat.model.BuyMessage;
 import com.am.restauarnts.ui.buychat.model.ChatModel;
 import com.am.restauarnts.ui.buychat.model.MessageText;
 import com.am.restauarnts.ui.models.OrderDetailsModel;
+import com.am.restauarnts.utils.DateUtils;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,13 +40,17 @@ public class ChatActivity extends BaseActivity {
     @BindView(R.id.recyclerViewOrder)
     RecyclerView recyclerViewOrder;
     @BindView(R.id.btnSend)
-    Button btnSend;
+    ImageButton btnSend;
     @BindView(R.id.txtMessage)
     EditText txtMessage;
     @BindView(R.id.tvName)
     TextView tvName;
     @BindView(R.id.tvDate)
     TextView tvDate;
+    @BindView(R.id.tvStatus)
+    TextView tvStatus;
+    @BindView(R.id.tvInfo)
+    TextView tvInfo;
 
     @OnClick(R.id.btnSend)
     void send(){
@@ -104,12 +114,32 @@ public class ChatActivity extends BaseActivity {
                 });
     }
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private void updateUI(OrderDetailsModel orderDetailsModel) {
         if(orderDetailsModel == null) return;
         OrdersBriefAdapter ordersBriefAdapter = new OrdersBriefAdapter(orderDetailsModel.getItems());
         recyclerViewOrder.setAdapter(ordersBriefAdapter);
-        tvDate.setText(orderDetailsModel.getCreated().toString());
+        tvDate.setText(DateUtils.formatDate(orderDetailsModel.getCreated()));
         tvName.setText(orderDetailsModel.getRestaurant().getName());
+        if (orderDetailsModel.getStatus() == 1){
+            tvInfo.setVisibility(View.GONE);
+            tvStatus.setText("Accepted");
+            txtMessage.setEnabled(true);
+            btnSend.setEnabled(true);
+            btnSend.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.red)));
+        }else if (orderDetailsModel.getStatus() == 2){
+            tvInfo.setVisibility(View.GONE);
+            tvStatus.setText("Rejected");
+            txtMessage.setEnabled(false);
+            btnSend.setEnabled(false);
+            btnSend.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.gray)));
+        }else{
+            tvInfo.setVisibility(View.VISIBLE);
+            tvStatus.setText("Pending");
+            txtMessage.setEnabled(false);
+            btnSend.setEnabled(false);
+            btnSend.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.gray)));
+        }
     }
 
     public static Intent getChatIntent(Context context, int orderId){
