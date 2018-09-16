@@ -33,8 +33,12 @@
             android:theme="@style/AppTheme.NoActionBarHome" />
         <activity android:name=".ui.activities.AddressActivity" />
         <activity android:name=".ui.activities.CartActivity" />
-        <activity android:name=".ui.activities.OrderDetailsActivity"/>
+        <activity android:name=".ui.activities.OrderDetailsActivity" />
         <activity android:name=".ui.buychat.ChatActivity" />
+
+        <service
+            android:name=".service.OrdersIntentService"
+            android:exported="false"></service>
     </application>
 
 </manifest>

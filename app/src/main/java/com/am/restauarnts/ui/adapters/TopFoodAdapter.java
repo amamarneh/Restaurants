@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.am.restauarnts.R;
+import com.am.restauarnts.ui.activities.FoodDetailsActivity;
 import com.am.restauarnts.ui.activities.RestaurantActivity;
 import com.am.restauarnts.ui.base.BaseAdapter;
 import com.am.restauarnts.ui.base.BaseViewHolder;
@@ -48,27 +49,40 @@ public class TopFoodAdapter extends BaseAdapter<TopFood> {
         return items!=null?items.size():0;
     }
 
-    class ItemHolder  extends BaseViewHolder{
+    class ItemHolder  extends BaseViewHolder implements View.OnClickListener{
         @BindView(R.id.tvRestaurantName)
         TextView tvRestaurantName;
         @BindView(R.id.tvName)
         TextView tvName;
         @BindView(R.id.imageView)
         ImageView imageView;
+        @BindView(R.id.tvPrice)
+        TextView tvPrice;
 
         public ItemHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
+            itemView.setOnClickListener(this);
         }
 
         @Override
         public void onBind(int position) {
-            tvRestaurantName.setText(items.get(position).getRestaurantName());
+            tvRestaurantName.setText(itemView.getContext().getString(R.string.available_at,
+                    items.get(position).getRestaurantName()));
             tvName.setText(items.get(position).getName());
+            tvPrice.setText(itemView.getContext().getString(R.string.price_format,
+                    String.valueOf(items.get(position).getPrice())));
             Glide.with(itemView.getContext()).load(items.get(position).getImage())
                     .apply(RequestOptions.placeholderOf(R.drawable.food1))
                     .into(imageView);
 
+        }
+
+        @Override
+        public void onClick(View view) {
+            int pos = getAdapterPosition();
+            Intent intent = FoodDetailsActivity.getForFood(itemView.getContext(),items.get(pos).getAsFood(),items.get(pos).getRestaurant());
+            itemView.getContext().startActivity(intent);
         }
     }
 }

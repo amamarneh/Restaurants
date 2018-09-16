@@ -46,6 +46,7 @@ public class AddressActivity extends BaseActivity {
                             Log.d("tag","success, orderId="+integerLiveResponse.data);
                             Intent intent = ChatActivity.getChatIntent(this,integerLiveResponse.data);
                             startActivity(intent);
+                            finish();
 
                         }else{
                             Log.d("tag","failed");
@@ -82,7 +83,7 @@ public class AddressActivity extends BaseActivity {
         setContentView(R.layout.activity_address);
         ButterKnife.bind(this);
         setupBackArrow();
-        setTitle("Address");
+        setTitle("Where are you");
         progressBar.setVisibility(View.GONE);
         //
         tvMobile.setText(RepoFactory.getUserRepo().getCurrentUser().getPhone());

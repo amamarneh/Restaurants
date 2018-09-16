@@ -1,11 +1,9 @@
 package com.am.restauarnts.repo;
 
-import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.am.restauarnts.data.DataFactory;
 import com.am.restauarnts.data.model.CategoryEntity;
-import com.am.restauarnts.data.model.OrderDetailsItemEntity;
 import com.am.restauarnts.data.model.OrderItem;
 import com.am.restauarnts.data.model.RestaurantEntity;
 import com.am.restauarnts.data.network.FirebaseEndPoint;
@@ -15,12 +13,12 @@ import com.am.restauarnts.data.response.MyOrdersResponse;
 import com.am.restauarnts.data.response.OrderCreatedResponse;
 import com.am.restauarnts.data.response.OrderDetailsResponse;
 import com.am.restauarnts.data.response.RestaurantsResponse;
+import com.am.restauarnts.data.response.TopFoodResponse;
 import com.am.restauarnts.task.LiveTask;
 import com.am.restauarnts.task.SingleLiveTask;
 import com.am.restauarnts.ui.buychat.model.BuyMessage;
 import com.am.restauarnts.ui.models.Cart;
 import com.am.restauarnts.ui.models.CartItem;
-import com.am.restauarnts.ui.models.Food;
 import com.am.restauarnts.ui.models.MenuItemModel;
 import com.am.restauarnts.ui.models.Option;
 import com.am.restauarnts.ui.models.OrderBriefModel;
@@ -31,12 +29,6 @@ import com.am.restauarnts.ui.models.TopFood;
 import com.am.restauarnts.utils.DateUtils;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.ParsedRequestListener;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentReference;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,10 +66,10 @@ public class AppActionRepo implements ActionRepo {
                     @Override
                     public void onResponse(MenuResponse response) {
                         List<MenuItemModel> list = new ArrayList<>();
-                        if (response.getCategories() != null){
+                        if (response.getCategories() != null) {
                             for (CategoryEntity c :
                                     response.getCategories()) {
-                                list.add(new MenuItemModel(c,restaurant));
+                                list.add(new MenuItemModel(c, restaurant));
                             }
                         }
                         task.success(list);
@@ -101,28 +93,28 @@ public class AppActionRepo implements ActionRepo {
         request.setUser_id(RepoFactory.getUserRepo().getCurrentUser().getId());
         List<OrderItem> items = new ArrayList<>();
         if (cart.getCartItems() != null)
-        for (CartItem ci :
-                cart.getCartItems()) {
-            OrderItem orderItem = new OrderItem();
-            orderItem.setMessage(ci.getMessage());
-            orderItem.setQuantity(ci.getQuantity());
-            orderItem.setStock_id(ci.getFood().getId());
-            List<Integer> options = new ArrayList<>();
-            if (ci.getOptions() != null)
-            for (Option o :
-                    ci.getOptions()) {
-                options.add(o.getId());
+            for (CartItem ci :
+                    cart.getCartItems()) {
+                OrderItem orderItem = new OrderItem();
+                orderItem.setMessage(ci.getMessage());
+                orderItem.setQuantity(ci.getQuantity());
+                orderItem.setStock_id(ci.getFood().getId());
+                List<Integer> options = new ArrayList<>();
+                if (ci.getOptions() != null)
+                    for (Option o :
+                            ci.getOptions()) {
+                        options.add(o.getId());
+                    }
+                orderItem.setOption(options);
+                items.add(orderItem);
             }
-            orderItem.setOption(options);
-            items.add(orderItem);
-        }
         request.setItems(items);
 
         DataFactory.getWebHelper()
                 .sendOrder(request, new ParsedRequestListener<OrderCreatedResponse>() {
                     @Override
                     public void onResponse(OrderCreatedResponse response) {
-                        Log.d("tag","response="+response.getOrder_id());
+                        Log.d("tag", "response=" + response.getOrder_id());
                         task.success(response.getOrder_id());
                     }
 
@@ -141,9 +133,9 @@ public class AppActionRepo implements ActionRepo {
         FirebaseEndPoint.getChatMessages(chatId)
                 .add(message)
                 .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()){
+                    if (task.isSuccessful()) {
                         t.success(null);
-                    }else
+                    } else
                         t.error(null);
                 });
         return t;
@@ -195,30 +187,20 @@ public class AppActionRepo implements ActionRepo {
 
     @Override
     public LiveTask<List<TopFood>> getTop() {
-        TopFood food = new TopFood();
-        food.setName("Top food 1");
-        food.setPrice(3);
-        food.setRestaurantName("Havana Restaurant");
+        LiveTask<List<TopFood>> task = new LiveTask<>();
+        DataFactory.getWebHelper()
+                .getTopFood(10, new ParsedRequestListener<TopFoodResponse>() {
+                    @Override
+                    public void onResponse(TopFoodResponse response) {
+                        task.success(TopFood.getAsList(response.getData()));
+                    }
 
-        TopFood food2 = new TopFood();
-        food2.setName("Top food 2");
-        food2.setPrice(32);
-        food2.setRestaurantName("Havana Restaurant");
-
-        TopFood food3 = new TopFood();
-        food3.setName("Top food 2");
-        food3.setPrice(31);
-        food3.setRestaurantName("Havana Restaurant");
-
-
-        List<TopFood> list = new ArrayList<>();
-        list.add(food);
-        list.add(food2);
-        list.add(food2);
-        list.add(food3);
-
-        LiveTask<List<TopFood>> task =new LiveTask<>();
-        task.success(list);
+                    @Override
+                    public void onError(ANError anError) {
+                        anError.printStackTrace();
+                        task.error(anError.getMessage());
+                    }
+                });
         return task;
     }
 }

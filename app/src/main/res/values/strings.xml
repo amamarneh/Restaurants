@@ -100,4 +100,7 @@
     <string name="tab_text_3">Tab 3</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="loading">Loading</string>
+
+    <string name="price_format" translatable="false">%s NIS</string>
+    <string name="available_at" translatable="false">Available at %s</string>
 </resources>

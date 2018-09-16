@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.am.restauarnts.data.model.FoodEntity;
+import com.am.restauarnts.data.model.TopFoodEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,41 +20,10 @@ public class TopFood implements Parcelable{
     private String description;
     private float price;
     private int categoryId;
-    private int restaurantId;
+    private Restaurant restaurant;
     private String restaurantName;
-    private List<TopFood> mandatory;
+    private List<Food> mandatory;
     private List<Option> options;
-
-    public String getRestaurantName() {
-        return restaurantName;
-    }
-
-    public void setRestaurantName(String restaurantName) {
-        this.restaurantName = restaurantName;
-    }
-
-    public TopFood() {
-    }
-    public TopFood(FoodEntity foodEntity) {
-        this.id = foodEntity.getId();
-        this.name = foodEntity.getName();
-        this.description = foodEntity.getDescription();
-        this.price = foodEntity.getPrice();
-        this.categoryId = foodEntity.getCategory_id();
-        this.restaurantId = foodEntity.getRestaurant_id();
-        this.image = foodEntity.getImage();
-        if (foodEntity.getMandatory() != null){
-            this.mandatory =new ArrayList<>(foodEntity.getMandatory().size());
-            for (FoodEntity f :
-                    foodEntity.getMandatory()) {
-                this.mandatory.add(new TopFood(f));
-            }
-        }
-
-    }
-    public boolean hasMandatory(){
-        return this.mandatory != null && !this.mandatory.isEmpty();
-    }
 
     protected TopFood(Parcel in) {
         id = in.readInt();
@@ -62,8 +32,9 @@ public class TopFood implements Parcelable{
         description = in.readString();
         price = in.readFloat();
         categoryId = in.readInt();
-        restaurantId = in.readInt();
-        mandatory = in.createTypedArrayList(TopFood.CREATOR);
+        restaurant = in.readParcelable(Restaurant.class.getClassLoader());
+        restaurantName = in.readString();
+        mandatory = in.createTypedArrayList(Food.CREATOR);
         options = in.createTypedArrayList(Option.CREATOR);
     }
 
@@ -78,6 +49,64 @@ public class TopFood implements Parcelable{
             return new TopFood[size];
         }
     };
+
+    public String getRestaurantName() {
+        return restaurantName;
+    }
+
+    public void setRestaurantName(String restaurantName) {
+        this.restaurantName = restaurantName;
+    }
+
+    public TopFood() {
+    }
+    public TopFood(TopFoodEntity foodEntity) {
+        this.id = foodEntity.getId();
+        this.name = foodEntity.getName();
+        this.description = foodEntity.getDescription();
+        this.price = foodEntity.getPrice();
+        this.categoryId = foodEntity.getCategory_id();
+        this.restaurantName = foodEntity.getRestaurant().getName();
+        this.restaurant = new Restaurant(foodEntity.getRestaurant());
+        this.image = foodEntity.getImage();
+        if (foodEntity.getMandatory() != null){
+            this.mandatory =new ArrayList<>(foodEntity.getMandatory().size());
+            for (FoodEntity f :
+                    foodEntity.getMandatory()) {
+                this.mandatory.add(new Food(f));
+            }
+        }
+
+    }
+    public static List<TopFood> getAsList(List<TopFoodEntity> foodEntities){
+        List<TopFood> list = new ArrayList<>();
+        for (TopFoodEntity entity :
+                foodEntities) {
+            list.add(new TopFood(entity));
+        }
+        return list;
+    }
+    public Food getAsFood(){
+        Food food = new Food();
+        food.setId(this.id);
+        food.setCategoryId(this.categoryId);
+        food.setDescription(this.description);
+        food.setImage(this.image);
+        food.setMandatory(this.mandatory);
+        food.setName(this.name);
+        food.setOptions(this.options);
+        food.setPrice(this.price);
+        food.setRestaurantId(this.restaurant.getId());
+        return food;
+    }
+
+    public boolean hasMandatory(){
+        return this.mandatory != null && !this.mandatory.isEmpty();
+    }
+
+
+
+
 
     public int getId() {
 
@@ -128,19 +157,19 @@ public class TopFood implements Parcelable{
         this.categoryId = categoryId;
     }
 
-    public int getRestaurantId() {
-        return restaurantId;
+    public Restaurant getRestaurant() {
+        return restaurant;
     }
 
-    public void setRestaurantId(int restaurantId) {
-        this.restaurantId = restaurantId;
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
     }
 
-    public List<TopFood> getMandatory() {
+    public List<Food> getMandatory() {
         return mandatory;
     }
 
-    public void setMandatory(List<TopFood> mandatory) {
+    public void setMandatory(List<Food> mandatory) {
         this.mandatory = mandatory;
     }
 
@@ -151,6 +180,7 @@ public class TopFood implements Parcelable{
     public void setOptions(List<Option> options) {
         this.options = options;
     }
+
 
     @Override
     public int describeContents() {
@@ -165,7 +195,8 @@ public class TopFood implements Parcelable{
         parcel.writeString(description);
         parcel.writeFloat(price);
         parcel.writeInt(categoryId);
-        parcel.writeInt(restaurantId);
+        parcel.writeParcelable(restaurant, i);
+        parcel.writeString(restaurantName);
         parcel.writeTypedList(mandatory);
         parcel.writeTypedList(options);
     }
