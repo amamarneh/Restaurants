@@ -28,7 +28,6 @@ public class OrderBriefModel {
         this.itemsCount = entity.getItems_count();
         this.status = entity.getStatus();
 
-
     }
     public static List<OrderBriefModel> getAsList(List<OrderBriefEntity> entities){
         List<OrderBriefModel> list = new ArrayList<>();

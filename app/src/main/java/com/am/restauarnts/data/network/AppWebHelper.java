@@ -1,6 +1,5 @@
 package com.am.restauarnts.data.network;
 
-import com.am.restauarnts.data.model.RestaurantEntity;
 import com.am.restauarnts.data.request.OrderCreateRequest;
 import com.am.restauarnts.data.response.MenuResponse;
 import com.am.restauarnts.data.response.MyOrdersResponse;
@@ -8,7 +7,6 @@ import com.am.restauarnts.data.response.OrderCreatedResponse;
 import com.am.restauarnts.data.response.OrderDetailsResponse;
 import com.am.restauarnts.data.response.RestaurantsResponse;
 import com.am.restauarnts.data.response.TopFoodResponse;
-import com.am.restauarnts.task.Task;
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.interfaces.ParsedRequestListener;
 
